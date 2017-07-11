@@ -1,4 +1,4 @@
-const port = 8088
+const port = 8080
 
 console.log("Environment: " + process.env.NODE_ENV);
 
