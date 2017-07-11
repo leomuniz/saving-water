@@ -1,5 +1,5 @@
 mongoose = require("mongoose")
-mongoAddress = process.env.NODE_ENV == "dev" ? "mongodb://localhost/vesi" : "mongodb://127.0.0.1:27017"
+mongoAddress = process.env.NODE_ENV == "dev" ? "mongodb://localhost/vesi" : "mongodb://127.0.0.1:27017/vesi"
 
 module.exports = mongoose.connect(mongoAddress)
 
