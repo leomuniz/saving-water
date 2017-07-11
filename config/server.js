@@ -1,5 +1,7 @@
 const port = 8088
 
+console.log("Environment: " + process.env.NODE_ENV);
+
 const bodyParser = require("body-parser")
 const express = require("express")
 const server = express()

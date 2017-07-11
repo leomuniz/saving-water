@@ -1,6 +1,7 @@
 mongoose = require("mongoose")
+mongoAddress = process.env.NODE_ENV == "dev" ? "mongodb://localhost/vesi" : "mongodb://127.0.0.1:27017"
 
-module.exports = mongoose.connect("mongodb://localhost/vesi")
+module.exports = mongoose.connect(mongoAddress)
 
 /*
 dbURI = "mongodb://mongodb.bontec.kinghost.net/bontec01"

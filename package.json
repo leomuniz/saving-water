@@ -4,8 +4,8 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "dev": "nodemon",
-    "prod": "pm2 start main.js --name bontec"
+    "dev": "export NODE_ENV=dev | nodemon",
+    "prod": "pm2 start main.js --name SavingWater"
   },
   "author": "Léo Muniz",
   "license": "ISC",
