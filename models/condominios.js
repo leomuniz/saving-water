@@ -1,18 +1,6 @@
 const restful = require("node-restful")
 const mongoose = restful.mongoose
 
-const sensoresSchema = new mongoose.Schema({
-    nome: { type:String, required:true },
-    apelido: { type: String, required:true, lowercase:true },
-    tipo: { type:String, required:true, enum:["pulso","ultrassonico","nivel","gas","fluxo"] },
-    vazaoNominal: { type:Number, reqquired:false },
-    vazaoMedia: { type: Number, required:false },
-    valorAtual: { type:Number, required:true, default:0 },
-    mediaDiaria: { type:Number, required:true, default:0 },
-    media30dias: { type:Number, required:true, default:0 },
-    ultimos30dias: { type:Number, required:true, default:0 }
-})
-
 const condominiosSchema = new mongoose.Schema({
     nome: { type:String, required:true },
     apelido: { type: String, required: true, lowercase:true, unique:true },
@@ -26,7 +14,7 @@ const condominiosSchema = new mongoose.Schema({
     email: { type:String, required:false },
     telefone: { type:String, required:false },
     celular: { type:String, required: false },
-    sensores: { type:[sensoresSchema], required:false },
+    sensores: { type:[String], required:false }, // apelidos dos sensores
     ativo: { type:Boolean, required:true, default:true },
     createdAt: { type: Date, default: Date.now }
 })
@@ -54,50 +42,6 @@ module.exports = model
 // sensores: [sensorSchema1, sensorSchema2]
 // ativo: true (verifica se o condomínio está com o pagamento em dia)
 // createdAt: data
-
-
-// Sensor pulsado - dentro da collection 'condominios'; campo 'sensores'
-// *************************************
-// nome: Hidrometro Entrada
-// apelido: hidr_entr
-// tipo: pulso
-// vazaoNominal: 166.7 (litros/minuto) (1 metro3/hora = 16,66667 litros/minutos) -- vazao declarada
-// vazaoMedia: 143.2 (litros/minuto)
-// valorAtual: 47839 (litros) -- número de pulsos recebidos desde o início
-// mediaDiaria: 284 (pulsos = litros)
-// media30dias: 3346 (pulsos = litros)
-// ultimos30dias: 3542 (pulsos = litros)
-
-// leitura pulsos
-// id_sensor: alpoli_hidr_entr (apelidoCondominio_apelidoSensor) - (index)
-// valor: 1 (litro - 1 pulso = 1 litro)
-// datahora: 20/06/2017 19:10
-
-
-// Sensor ultrassônico
-// *************************************
-// nome: cisterna
-// apelido: cist
-// tipo: ultrassonico
-// vazaoNominal: null
-// vazaoMedia: null
-// valorAtual: 897 (litros) = 89,7%
-// mediaDiaria: 64%
-// media30dias: 67%
-// ultimos30dias: 66% 
-
-// leitura ultrassônico
-// id_sensor: alpoli_cisterna (apelidoCondominio_apelidoSensor)
-// valor: 689 (69%)
-// datahora: 20/06/2017 19:10
-
-// leitura ultrassônico
-// id_sensor: alpoli_cisterna (apelidoCondominio_apelidoSensor)
-// valor: 710 (71%)
-// datahora: 20/06/2017 19:11
-
-// sensor de nível, se necessário, pode ser igual ao sensor ultrassônico, passando somente 25%, 50%, 75%...
-
 
 // Condomínios - Data do POSTMAN
 // nome:Edifício Colorado

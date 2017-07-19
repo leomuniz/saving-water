@@ -5,7 +5,7 @@ console.log("Environment: " + process.env.NODE_ENV);
 const bodyParser = require("body-parser")
 const express = require("express")
 const server = express()
-//const allowCors = require("./cors.js")
+const allowCors = require("./cors.js")
 
 // parse application/x-www-form-urlencoded
 server.use(bodyParser.urlencoded({ extended: true }))

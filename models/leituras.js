@@ -12,7 +12,6 @@ model = restful.model("Leituras", leiturasSchema)
 model.methods(['get', 'post', 'put', 'delete'])
 model.updateOptions({ new: true, runValidators:true })
 
-
 model.route('count', (req, res, next) => {
     model.count((error, value) => { // mongoose count method
         if (error) {
@@ -21,11 +20,6 @@ model.route('count', (req, res, next) => {
             res.json({ value })
         }
     })
-})
-
-model.before('get', function (req, res, next) {
-
-    next()
 })
 
 model.after('post', function (req, res, next) {
@@ -41,3 +35,22 @@ module.exports = model
 // id_sensor:colorado_hidr_entr
 // valor:1
 // datahora: 2017-06-21T00:19:00.234Z  (ISO format)
+
+// leitura pulsos
+// id_sensor: alpoli_hidr_entr (apelidoCondominio_apelidoSensor) - (index)
+// valor: 1 (litro - 1 pulso = 1 litro)
+// datahora: 20/06/2017 19:10
+
+
+// leitura ultrassônico
+// id_sensor: alpoli_cisterna (apelidoCondominio_apelidoSensor)
+// valor: 689 (69%)
+// datahora: 20/06/2017 19:10
+
+
+// leitura ultrassônico
+// id_sensor: alpoli_cisterna (apelidoCondominio_apelidoSensor)
+// valor: 710 (71%)
+// datahora: 20/06/2017 19:11
+
+// sensor de nível, se necessário, pode ser igual ao sensor ultrassônico, passando somente 25%, 50%, 75%...
