@@ -14,16 +14,27 @@ const condominiosSchema = new mongoose.Schema({
     email: { type:String, required:false },
     telefone: { type:String, required:false },
     celular: { type:String, required: false },
-    sensores: { type:[String], required:false }, // apelidos dos sensores
+    modulos: { type:[String], required:false }, // apelidos dos módulos (ard01; ard02...)
     ativo: { type:Boolean, required:true, default:true },
-    createdAt: { type: Date, default: Date.now }
+    createdAt: { type: Date, default: Date.now },
+    token: { type: String, required:false, index:true } 
 })
 
-model = restful.model("Condominios", condominiosSchema)
-model.methods(['get', 'post', 'put', 'delete'])
-model.updateOptions({ new: true, runValidators:true })
+modelCond = restful.model("Condominios", condominiosSchema)
+modelCond.methods(['get', 'post', 'put', 'delete'])
+modelCond.updateOptions({ new: true, runValidators:true })
 
-module.exports = model
+modelCond.generateToken = (req, res, next) => {
+    var token = jwt.sign({ apelido: res.locals.bundle.apelido, role: "condominio" }, sysvar.jwtSecret);
+    res.locals.bundle.token = token // é necessária a presença do token no Schema para essa alteração funcionar
+    next()
+}
+
+modelCond.after("post", modelCond.generateToken)
+modelCond.after("put", modelCond.generateToken)
+
+
+module.exports = modelCond
 
 // Condomínio
 // *************************************

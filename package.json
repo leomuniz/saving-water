@@ -5,7 +5,7 @@
   "main": "main.js",
   "scripts": {
     "dev": "export NODE_ENV=dev | nodemon",
-    "prod": "pm2 start main.js --name SavingWater"
+    "prod": "pm2 start main.js --name SavingWater --watch"
   },
   "author": "Léo Muniz",
   "license": "ISC",

@@ -38,6 +38,10 @@ module.exports = function(server) {
     const condominios = require("../models/condominios")
     condominios.register(apiRouter, "/condominios")
 
+    // Módulos - Routes
+    const modulos = require("../models/modulos")
+    modulos.register(apiRouter, "/modulos")
+
     // Sensores - Routes
     const sensores = require("../models/sensores")
     sensores.register(apiRouter, "/sensores")

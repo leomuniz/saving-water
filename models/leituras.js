@@ -2,18 +2,19 @@ const restful = require("node-restful")
 const mongoose = restful.mongoose
 
 const leiturasSchema = new mongoose.Schema({
+    id_post: { type:String, required:true, index:true },
     id_sensor: { type:String, required:true, index:true },
     valor: { type:Number, required:true },
     datahora: { type:Date, default: Date.now },
     createdAt: { type: Date, default: Date.now }
 })
 
-model = restful.model("Leituras", leiturasSchema)
-model.methods(['get', 'post', 'put', 'delete'])
-model.updateOptions({ new: true, runValidators:true })
+modelLeituras = restful.model("Leituras", leiturasSchema)
+modelLeituras.methods(['get', 'post', 'put', 'delete'])
+modelLeituras.updateOptions({ new: true, runValidators:true })
 
-model.route('count', (req, res, next) => {
-    model.count((error, value) => { // mongoose count method
+modelLeituras.route('count', (req, res, next) => {
+    modelLeituras.count((error, value) => { // mongoose count method
         if (error) {
             res.status(500).json({ errors: [error] })
         } else {
@@ -22,13 +23,13 @@ model.route('count', (req, res, next) => {
     })
 })
 
-model.after('post', function (req, res, next) {
+modelLeituras.after('post', function (req, res, next) {
     // após o post é necessário atualizar os valores atuais dos sensores
 
     next(); // Don't forget to call next!
 });
 
-module.exports = model
+module.exports = modelLeituras
 
 
 // POSTMAN post format

@@ -2,7 +2,7 @@
 var roles = {    
     admin: { all:["all"] },
     user:{ all:["get"], condominios:["post"] },
-    sensor: { leituras:["post"] },
+    condominio: { leituras:["post"] } // o token de condomínio só permite enviar leitura de sensor
 }
 
 

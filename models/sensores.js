@@ -6,7 +6,7 @@ const mongoose = restful.mongoose
 const sensoresSchema = new mongoose.Schema({
     nome: { type:String, required:true },
     apelido: { type: String, required:true, lowercase:true, unique: true },    
-    tipo: { type:String, required:true, enum:["pulso","ultrassonico","nivel","gas","fluxo"] },
+    tipo: { type:String, required:true, enum:["pulso","ultrassonico","nivel","gas","fluxo", "chave"] },
     vazaoNominal: { type:Number, required:false }, // vazao declarada - litros/minuto (1 metro3/hora = 16,66667 litros/minutos)
     vazaoMedia: { type: Number, required:false },
     valorAtual: { type:Number, required:true, default:0 },
@@ -14,23 +14,15 @@ const sensoresSchema = new mongoose.Schema({
     media30dias: { type:Number, required:true, default:0 },
     ultimos30dias: { type:Number, required:true, default:0 },
     condominio: { type:String, required:true, index: true },
+    modulo: { type:String, required:true, index:true },
     token: { type: String, required:false, index: true }
 })
 
-model = restful.model("Sensores", sensoresSchema)
-model.methods(['get', 'post', 'put', 'delete'])
-model.updateOptions({ new: true, runValidators:true })
+modelSensores = restful.model("Sensores", sensoresSchema)
+modelSensores.methods(['get', 'post', 'put', 'delete'])
+modelSensores.updateOptions({ new: true, runValidators:true })
 
-model.generateToken = (req, res, next) => {
-    var token = jwt.sign({ apelido: res.locals.bundle.apelido, role: "sensor" }, sysvar.jwtSecret);
-    res.locals.bundle.token = token // é necessária a presença do token no Schema para essa alteração funcionar
-    next()
-}
-
-model.after("post", model.generateToken)
-model.after("put", model.generateToken)
-
-module.exports = model
+module.exports = modelSensores
 
 // Sensor pulsado - dentro da collection 'condominios'; campo 'sensores'
 // *************************************
