@@ -1,6 +1,5 @@
 const restful = require("node-restful")
 const sysvar = require("../config/sysvar")
-const jwt = require("jsonwebtoken")
 const mongoose = restful.mongoose
 
 const sensoresSchema = new mongoose.Schema({

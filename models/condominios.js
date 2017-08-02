@@ -1,4 +1,5 @@
 const restful = require("node-restful")
+const jwt = require("jsonwebtoken")
 const mongoose = restful.mongoose
 
 const condominiosSchema = new mongoose.Schema({
