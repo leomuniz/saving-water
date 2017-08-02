@@ -13,8 +13,7 @@ const sensoresSchema = new mongoose.Schema({
     media30dias: { type:Number, required:true, default:0 },
     ultimos30dias: { type:Number, required:true, default:0 },
     condominio: { type:String, required:true, index: true },
-    modulo: { type:String, required:true, index:true },
-    token: { type: String, required:false, index: true }
+    modulo: { type:String, required:true, index:true }
 })
 
 modelSensores = restful.model("Sensores", sensoresSchema)
