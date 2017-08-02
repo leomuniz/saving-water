@@ -28,6 +28,7 @@ modelCond.updateOptions({ new: true, runValidators:true })
 modelCond.generateToken = (req, res, next) => {
     var token = jwt.sign({ apelido: res.locals.bundle.apelido, role: "condominio" }, sysvar.jwtSecret);
     res.locals.bundle.token = token // é necessária a presença do token no Schema para essa alteração funcionar
+    req.body.token = token // para o token correto ser gravado no banco de dados
     next()
 }
 
