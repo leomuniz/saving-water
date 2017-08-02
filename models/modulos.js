@@ -17,13 +17,13 @@ modelModulos.prefixo = { arduino: "ard" }
 
 // auto increment funcion to generate id modulo
 modelModulos.before("post", (req, res, next) => {
-    modelModulos.findOne({},{ id:"id" },{ sort: { 'createdAt' : -1 } }, function(err, modulo) {
+    modelModulos.findOne({},{ apelido:"apelido" },{ sort: { 'createdAt' : -1 } }, function(err, modulo) {
         var prefixo = modelModulos.prefixo[req.body.tipo]
         if (modulo) {
-            modulo.id = modulo.id.replace(prefixo,"")
-            req.body.id = prefixo + (modulo.id-0+1)
+            modulo.apelido = modulo.apelido.replace(prefixo,"")
+            req.body.apelido = prefixo + (modulo.apelido-0+1)
         } else {
-            req.body.id = prefixo + "1"
+            req.body.apelido = prefixo + "1"
         }
         next()
     })   
