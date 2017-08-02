@@ -2,7 +2,7 @@ const restful = require("node-restful")
 const mongoose = restful.mongoose
 
 const modulosSchema = new mongoose.Schema({
-    id: { type:String, required:true, unique:true }, //ard01; ard02...
+    apelido: { type:String, required:true, unique:true }, //ard01; ard02...
     tipo: { type:String, required:true, enum:["arduino"] },
     condominio: { type:String, required:true, index:true },
     sensores: { type:[String], required:false },
