@@ -6,6 +6,7 @@ const sensoresSchema = new mongoose.Schema({
     nome: { type:String, required:true },
     apelido: { type: String, required:true, lowercase:true, unique: true },    
     tipo: { type:String, required:true, enum:["pulso","ultrassonico","nivel","gas","fluxo", "chave"] },
+    pinoEntrada: { type:String, required:true },
     vazaoNominal: { type:Number, required:false }, // vazao declarada - litros/minuto (1 metro3/hora = 16,66667 litros/minutos)
     vazaoMedia: { type: Number, required:false },
     valorAtual: { type:Number, required:true, default:0 },
