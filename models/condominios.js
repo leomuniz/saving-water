@@ -26,15 +26,13 @@ modelCond.methods(['get', 'post', 'put', 'delete'])
 modelCond.updateOptions({ new: true, runValidators:true })
 
 modelCond.generateToken = (req, res, next) => {
-    var token = jwt.sign({ apelido: res.locals.bundle.apelido, role: "condominio" }, sysvar.jwtSecret);
-    res.locals.bundle.token = token // é necessária a presença do token no Schema para essa alteração funcionar
-    req.body.token = token // para o token correto ser gravado no banco de dados
+    var token = jwt.sign({ apelido: req.body.apelido, role: "condominio" }, sysvar.jwtSecret);
+    req.body.token = token // para salvar o token correto no banco de dados (e nãoo token utilizado para criar o condomínio)
     next()
 }
 
-modelCond.after("post", modelCond.generateToken)
-modelCond.after("put", modelCond.generateToken)
-
+modelCond.before("post", modelCond.generateToken)
+modelCond.before("put", modelCond.generateToken)
 
 module.exports = modelCond
 
