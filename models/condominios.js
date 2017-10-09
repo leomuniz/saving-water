@@ -27,7 +27,7 @@ modelCond.updateOptions({ new: true, runValidators:true })
 
 modelCond.generateToken = (req, res, next) => {
     var token = jwt.sign({ apelido: req.body.apelido, role: "condominio" }, sysvar.jwtSecret);
-    req.body.token = token // para salvar o token correto no banco de dados (e nãoo token utilizado para criar o condomínio)
+    req.body.token = token // para salvar o token correto no banco de dados (e não token utilizado para criar o condomínio)
     next()
 }
 
