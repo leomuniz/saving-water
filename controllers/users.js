@@ -42,7 +42,7 @@ module.exports = {
             // verifies secret and checks exp
             jwt.verify(token, sysvar.jwtSecret, function (err, user) {
                 if (err) {
-                    return res.json({ success: false, message: 'Failed to authenticate token.' });
+                    return res.json({ success: false, message: 'Failed to authenticate token.', token:token });
                 } else {
                     
                     var endpoint = req._parsedUrl.pathname.replace(/\//g,'');
