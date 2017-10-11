@@ -32,8 +32,8 @@ modelLeituras.before('post', function(req, res, next) {
         if (err) return handleError(err);
         if (total > 0) {
             console.log("Leitura já registrada")
-            res.setHeader('content-type', 'text/plain')
-            res.send(req.body.queueFile) // arquivo de fila processado
+            res.setHeader('content-type', 'application/json')
+            res.send("{status:208;file:" + req.body.queueFile + "}") // arquivo de fila processado (status 208 = already reported)
             res.end() // termina requisição
         } else {
             next()
@@ -45,8 +45,8 @@ modelLeituras.after('post', function (req, res, next) {
     // após o post é necessário atualizar os valores atuais dos sensores
     modelLeituras.atualizaSensor(req.body);
 
-    res.setHeader('content-type', 'text/plain');
-    res.locals.bundle = parseInt(req.body.queueFile)
+    res.setHeader('content-type', 'application/json');
+    res.locals.bundle = "{status:201;file:" + req.body.queueFile + "}"
     next(); // Don't forget to call next!
 });
 
