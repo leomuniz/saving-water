@@ -12,7 +12,7 @@
   "dependencies": {
     "bcrypt": "^1.0.2",
     "body-parser": "^1.17.2",
-    "express": "^4.15.3",
+    "express": "^4.17.3",
     "jsonwebtoken": "^7.4.1",
     "mongoose": "^4.10.7",
     "node-restful": "^0.2.6",
